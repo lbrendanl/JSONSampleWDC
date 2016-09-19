@@ -1,54 +1,66 @@
-[
+{
+  "tables" : [
     {
-        "alias": "Users",
-        "id": "users",
-        "columns": [
-            { "id": "id", "dataType": "int" },
-            { "id": "name", "dataType": "string" },
-            { "id": "username", "dataType": "string" },
-            { "id": "phone", "dataType": "string" },
-            { "id": "website",  "dataType": "string" }
-        ]
-    },
-    {
-        "alias": "Posts",
-        "id": "posts",
-        "columns": [
-            { "id": "id", "dataType": "int" },
-            { "id": "postId", "dataType": "int" },
-            { "id": "title", "dataType": "string" },
-            { "id": "body", "dataType": "string" }
-        ]
-    },
-    {
-        "alias": "Comments",
-        "id": "comments",
-        "columns": [
-            { "id": "id", "dataType": "int" },
-            { "id": "userId", "dataType": "int" },
-            { "id": "name", "dataType": "string" },
-            { "id": "email", "dataType": "string" },
-            { "id": "body", "dataType": "string" }
-        ]
-    },
-    {
-        "alias": "Albums",
-        "id": "albums",
-        "columns": [
-            { "id": "id", "dataType": "int" },
-            { "id": "userId", "dataType": "int" },
-            { "id": "title", "dataType": "string" }
-        ]        
-    },
-    {
-        "alias": "Photos",
-        "id": "photos",
-        "columns": [
-            { "id": "id", "dataType": "int" },
-            { "id": "albumId", "dataType": "int" },
-            { "id": "title", "dataType": "string" },
-            { "id": "url", "dataType": "string" },
-            { "id": "thumbnailUrl", "dataType": "string" }
-        ]
+      "id" : "posts",
+      "alias" : "Posts",
+      "columns" : [
+        { "id" : "userId", "alias" : "User ID", "dataType" : "int"    },
+        { "id" : "id",     "alias" : "ID",      "dataType" : "int"    },
+        { "id" : "title",  "alias" : "Title",   "dataType" : "string" },
+        { "id" : "body",   "alias" : "Body",    "dataType" : "string" }
+      ]
+    },{
+      "id" : "comments",
+      "alias" : "Comments",
+      "columns" : [
+        { "id" : "postId", "alias" : "Post ID", "dataType" : "int"    },
+        { "id" : "id",     "alias" : "ID",      "dataType" : "int"    },
+        { "id" : "name",   "alias" : "Name",    "dataType" : "string" },
+        { "id" : "email",  "alias" : "Email",   "dataType" : "string" },
+        { "id" : "body",   "alias" : "Body",    "dataType" : "string" }
+      ]
+    },{
+      "id" : "albums",
+      "alias" : "Albums",
+      "columns" : [
+        { "id" : "userId", "alias" : "User ID", "dataType" : "int"    },
+        { "id" : "id",     "alias" : "ID",      "dataType" : "int"    },
+        { "id" : "title",  "alias" : "Title",   "dataType" : "string" }
+      ]
+    },{
+      "id" : "photos",
+      "alias" : "Photos",
+      "columns" : [
+        { "id" : "albumId",      "alias" : "Album ID",     "dataType" : "int"    },
+        { "id" : "id",           "alias" : "ID",           "dataType" : "int"    },
+        { "id" : "title",        "alias" : "Title",        "dataType" : "string" },
+        { "id" : "url",          "alias" : "URL",          "dataType" : "string" },
+        { "id" : "thumbnailUrl", "alias" : "Thumnail URL", "dataType" : "string" }
+      ]
+    },{
+      "id" : "todos",
+      "alias" : "To Dos",
+      "columns" : [
+        { "id" : "userId",    "alias" : "User ID",   "dataType" : "int"    },
+        { "id" : "id",        "alias" : "ID",        "dataType" : "int"    },
+        { "id" : "title",     "alias" : "Title",     "dataType" : "string" },
+        { "id" : "completed", "alias" : "Completed", "dataType" : "bool"   }
+      ]
+    },{
+      "id" : "users",
+      "alias" : "Users",
+      "columns" : [
+        { "id" : "id",          "alias" : "ID",           "dataType" : "int"    },
+        { "id" : "name",        "alias" : "Name",         "dataType" : "string" },
+        { "id" : "lat",         "alias" : "Latitude",     "dataType" : "float",  "geoRole" : "latitude"  },
+        { "id" : "lng",         "alias" : "Longitude",    "dataType" : "float",  "geoRole" : "longitude" },
+        { "id" : "zipcode",     "alias" : "Zipcode",      "dataType" : "string", "geoRole" : "zipcode"   },
+        { "id" : "phone",       "alias" : "Phone Number", "dataType" : "string" },
+        { "id" : "website",     "alias" : "Website",      "dataType" : "string" },
+        { "id" : "companyname", "alias" : "Company Name", "dataType" : "string" },
+        { "id" : "catchPhrase", "alias" : "Catch Phrase", "dataType" : "string" },
+        { "id" : "bs",          "alias" : "BS",           "dataType" : "string" }
+      ]
     }
-]
+  ]
+}

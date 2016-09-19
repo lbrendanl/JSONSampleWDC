@@ -4,15 +4,19 @@
     myConnector.getSchema = function(schemaCallback) {
         // In this sample, we read our schema definition from a local JSON file.
         $.getJSON("./JSONMultiTableData.json", function(schemaJson) {
-            schemaCallback(schemaJson);
+            $.getJSON("./StandardConnections.json", function(connectionsJson) {
+                schemaCallback(schemaJson, connectionsJson);
+            });
         });
     };
 
     myConnector.getData = function(table, doneCallback) {
         var apiURL = 'http://jsonplaceholder.typicode.com/' + table.tableInfo.id;
+        tableau.reportProgress("Fetching data from the " + table.alias + " table.");
         $.ajax(apiURL, {
             method: 'GET'
         }).then(function(data) {
+            tableau.reportProgress("Appending " + table.alias + " data to extract.");
             table.appendRows(data);
             doneCallback();
         });
