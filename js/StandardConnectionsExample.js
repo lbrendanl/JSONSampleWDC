@@ -35,6 +35,8 @@
   }
 
   myConnector.getData = function(table, doneCallback) {
+    tableau.reportProgress("Gathering records from the " + table.alias + " table.");
+
     // Load our data from the API. Multiple tables for WDC work by calling getData multiple times with a different id
     // so we want to make sure we are getting the correct table data per getData call
     loadJSON(table.tableInfo.id, function(data) {
@@ -65,6 +67,7 @@
         tableData.push(tableEntry);
       }
       // Once we have all the data parsed, we send it to the Tableau table object
+      tableau.reportProgress("Appending " + table.alias + " data to extract.");
       table.appendRows(tableData);
       doneCallback();
     });
