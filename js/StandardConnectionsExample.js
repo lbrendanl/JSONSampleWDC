@@ -36,11 +36,12 @@
 
   myConnector.getData = function(table, doneCallback) {
     var i = 1000;
-    setInterval(function () {
+    var id = setInterval(function () {
         tableau.reportProgress("Fetched " + i + " records so far...")
         i = i+1000;
         
         if (i > 10000) {
+          clearInterval(id);
           // Load our data from the API. Multiple tables for WDC work by calling getData multiple times with a different id
           // so we want to make sure we are getting the correct table data per getData call
           loadJSON(table.tableInfo.id, function(data) {
