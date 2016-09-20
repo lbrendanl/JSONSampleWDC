@@ -35,42 +35,48 @@
   }
 
   myConnector.getData = function(table, doneCallback) {
-    tableau.reportProgress("Gathering records from the " + table.id + " table.");
+    var i = 1000;
+    setInterval(function () {
+        tableau.reportProgress("Fetched " + i + " records so far...")
+        i = i+1000;
+        
+        if (i > 10000) {
+          // Load our data from the API. Multiple tables for WDC work by calling getData multiple times with a different id
+          // so we want to make sure we are getting the correct table data per getData call
+          loadJSON(table.tableInfo.id, function(data) {
+            var obj = JSON.parse(data);
+            var tableData = [];
+            // Iterate through the data and build our table
+            for (var i = 0; i < obj.length; i++) {
+              tableEntry = {};
+              var ref = obj[i];
+              // We can use this handy shortcut because our JSON column names match our schema's column names perfectly
+              Object.getOwnPropertyNames(ref).forEach(function(val, idx, array){
+                // Handle specific cases by checking the name of the property
+                switch(val) {
+                  case "address":
+                    tableEntry.lat = ref[val].geo.lat;
+                    tableEntry.lng = ref[val].geo.lng;
+                    tableEntry.zipcode = ref[val].zipcode;
+                    break;
+                  case "company":
+                    tableEntry.companyname = ref[val].name;
+                    tableEntry.catchPhrase = ref[val].catchPhrase;
+                    tableEntry.bs = ref[val].bs;
+                    break;
+                  default:
+                    tableEntry[val] = ref[val];
+                }
+              });
+              tableData.push(tableEntry);
+            }
+            // Once we have all the data parsed, we send it to the Tableau table object
+            table.appendRows(tableData);
+            doneCallback();
+          });
+        }
 
-    // Load our data from the API. Multiple tables for WDC work by calling getData multiple times with a different id
-    // so we want to make sure we are getting the correct table data per getData call
-    loadJSON(table.tableInfo.id, function(data) {
-      var obj = JSON.parse(data);
-      var tableData = [];
-      // Iterate through the data and build our table
-      for (var i = 0; i < obj.length; i++) {
-        tableEntry = {};
-        var ref = obj[i];
-        // We can use this handy shortcut because our JSON column names match our schema's column names perfectly
-        Object.getOwnPropertyNames(ref).forEach(function(val, idx, array){
-          // Handle specific cases by checking the name of the property
-          switch(val) {
-            case "address":
-              tableEntry.lat = ref[val].geo.lat;
-              tableEntry.lng = ref[val].geo.lng;
-              tableEntry.zipcode = ref[val].zipcode;
-              break;
-            case "company":
-              tableEntry.companyname = ref[val].name;
-              tableEntry.catchPhrase = ref[val].catchPhrase;
-              tableEntry.bs = ref[val].bs;
-              break;
-            default:
-              tableEntry[val] = ref[val];
-          }
-        });
-        tableData.push(tableEntry);
-      }
-      // Once we have all the data parsed, we send it to the Tableau table object
-      tableau.reportProgress("Appending " + table.alias + " data to extract.");
-      table.appendRows(tableData);
-      doneCallback();
-    });
+    }, 1000);
   }
   tableau.registerConnector(myConnector);
 })();
