@@ -2,7 +2,7 @@
   "tables" : [
     {
       "id" : "posts",
-      "alias" : "Posts",
+      "defaultAlias" : "Posts",
       "columns" : [
         { "id" : "userId", "alias" : "User ID", "dataType" : "int"    },
         { "id" : "id",     "alias" : "ID",      "dataType" : "int"    },
@@ -11,7 +11,7 @@
       ]
     },{
       "id" : "comments",
-      "alias" : "Comments",
+      "defaultAlias" : "Comments",
       "columns" : [
         { "id" : "postId", "alias" : "Post ID", "dataType" : "int"    },
         { "id" : "id",     "alias" : "ID",      "dataType" : "int"    },
@@ -21,7 +21,7 @@
       ]
     },{
       "id" : "albums",
-      "alias" : "Albums",
+      "defaultAlias" : "Albums",
       "columns" : [
         { "id" : "userId", "alias" : "User ID", "dataType" : "int"    },
         { "id" : "id",     "alias" : "ID",      "dataType" : "int"    },
@@ -29,7 +29,7 @@
       ]
     },{
       "id" : "photos",
-      "alias" : "Photos",
+      "defaultAlias" : "Photos",
       "columns" : [
         { "id" : "albumId",      "alias" : "Album ID",     "dataType" : "int"    },
         { "id" : "id",           "alias" : "ID",           "dataType" : "int"    },
@@ -39,7 +39,7 @@
       ]
     },{
       "id" : "todos",
-      "alias" : "To Dos",
+      "defaultAlias" : "To Dos",
       "columns" : [
         { "id" : "userId",    "alias" : "User ID",   "dataType" : "int"    },
         { "id" : "id",        "alias" : "ID",        "dataType" : "int"    },
@@ -48,7 +48,7 @@
       ]
     },{
       "id" : "users",
-      "alias" : "Users",
+      "defaultAlias" : "Users",
       "columns" : [
         { "id" : "id",          "alias" : "ID",           "dataType" : "int"    },
         { "id" : "name",        "alias" : "Name",         "dataType" : "string" },
